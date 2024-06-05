@@ -1,0 +1,12 @@
+﻿@page "/category"
+<h3>Category</h3>
+<div class="text-center">
+    <button class="btn btn-success" @onclick="AddNew">New</button>
+</div>
+
+@code {
+    private async Task AddNew()
+    {
+        App.Current.MainPage.DisplayAlert("Uyarı", "Kabul", "Red");
+    }
+}

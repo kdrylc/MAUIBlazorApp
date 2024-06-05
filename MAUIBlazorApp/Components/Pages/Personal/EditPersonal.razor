@@ -1,0 +1,30 @@
+﻿@page "/personal/edit/{Id}"
+@using MAUIBlazorApp.Services
+@using MAUIBlazorApp.Components.Component.Personal
+@inject PersonalService ps
+@inject NavigationManager nm
+<h3>EditPersonal</h3>
+
+<FormPersonal Personal="Personal"></FormPersonal>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    public string title { get; set; } = "Metin";
+
+    public Classes.Personal.Personal Personal { get; set; } = new Classes.Personal.Personal();
+    private async Task register()
+    {
+        nm.NavigateTo("/personal");
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Personal = await ps.GetById(int.Parse(Id));
+    }
+
+    private async Task submit()
+    {
+        title = "metin2";
+    }
+}

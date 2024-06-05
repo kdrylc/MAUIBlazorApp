@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUIBlazorApp", "MAUIBlazorApp\MAUIBlazorApp.csproj", "{4FDBE8D3-BC7B-4180-B303-7477B02F52A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUIBlazorApp.Classes", "MAUIBlazorApp.Classes\MAUIBlazorApp.Classes.csproj", "{B406F8E0-A61D-4005-B05D-BAC535EAED7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FDBE8D3-BC7B-4180-B303-7477B02F52A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FDBE8D3-BC7B-4180-B303-7477B02F52A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FDBE8D3-BC7B-4180-B303-7477B02F52A6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4FDBE8D3-BC7B-4180-B303-7477B02F52A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FDBE8D3-BC7B-4180-B303-7477B02F52A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FDBE8D3-BC7B-4180-B303-7477B02F52A6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B406F8E0-A61D-4005-B05D-BAC535EAED7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B406F8E0-A61D-4005-B05D-BAC535EAED7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B406F8E0-A61D-4005-B05D-BAC535EAED7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B406F8E0-A61D-4005-B05D-BAC535EAED7D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8ED54EA7-C422-4B54-A1C8-CA34250F9338}
+	EndGlobalSection
+EndGlobal

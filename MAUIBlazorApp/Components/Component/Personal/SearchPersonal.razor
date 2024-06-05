@@ -1,0 +1,21 @@
+﻿@using MAUIBlazorApp.Services
+@inject AlertService ac
+@inject PersonalService ps
+<div class="input-group mt-3">
+    <input type="text" class="form-control" placeholder="search" @bind-value="Name" />
+    <button @onclick="search" class="btn btn-secondary">Search</button>
+    <button @onclick="clean" class="btn btn-secondary">Clean</button>
+</div>
+
+@code {
+    public string Name { get; set; }
+    private async Task search()
+    {
+        ps.notificationSearch(Name);
+    }
+    private async Task clean()
+    {
+        Name = "";
+        ps.personalSearch(Name);
+    }
+}

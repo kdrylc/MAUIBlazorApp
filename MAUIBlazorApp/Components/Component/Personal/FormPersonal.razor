@@ -1,0 +1,58 @@
+﻿@using MAUIBlazorApp.Services
+@inject PersonalService ps
+@inject NavigationManager nm
+@inject AlertService ac
+
+<h3>FormPersonal</h3>
+<EditForm Model="@Personal" OnValidSubmit="submit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="mt-3">
+        <label>Id</label>
+        <InputNumber readonly class="form-control" @bind-Value="Personal.Id" />
+    </div>
+
+    <div class="mt-3">
+        <label>Name</label>
+        <InputText class="form-control" @bind-Value="Personal.Name" />
+        <ValidationMessage For="(()=>Personal.Name)"></ValidationMessage>
+    </div>
+
+    <div class="mt-3">
+        <label>Surname</label>
+        <InputText class="form-control" @bind-Value="Personal.Surname" />
+        <ValidationMessage For="(()=>Personal.Surname)"></ValidationMessage>
+
+    </div>
+
+    <div class="mt-3">
+        <button class="btn btn-success" type="submit">Submit</button>
+        <button class="btn btn-danger" @onclick="register">Register</button>
+    </div>
+</EditForm>
+@code {
+    [Parameter]
+    public Classes.Personal.Personal Personal { get; set; } = new Classes.Personal.Personal();
+    private async Task register()
+    {
+        nm.NavigateTo("/personal");
+    }
+    private async Task submit()
+    {
+        // bool opt = await App.Current.MainPage.DisplayAlert("Onay", "Emin misin?", "Evet", "Hayır");
+        bool opt = await ac.confirmation("Bildirim", "Emin misin?");
+        if (opt)
+        {
+            bool exit = await ps.addPersonal(Personal);
+            if (exit)
+            {
+                await ac.alert("Çıkış", "Kayıt Ekleme");
+                nm.NavigateTo("/personal");
+            }
+            else
+            {
+                await ac.alert("Error", "No Kayıt Ekleme");
+            }
+        }
+
+    }
+}

@@ -1,0 +1,63 @@
+﻿@using MAUIBlazorApp.Services
+@inject BasketService bs
+@inject AlertService aS
+<h3>Category @name</h3>
+@foreach (var item in list)
+{
+        <div class="d-flex justify-content-center mb-3">
+
+    <div class="card mt-4" style="width:18rem;">
+        <img src="" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+            <div class="d-flex justify-content-between">
+                <h6>Price: $/@item.Price</h6>
+                <h6>Stock: $/@item.Stock</h6>
+            </div>
+            <div class="text-center">
+                    <label>Count</label>
+            </div>
+            <input disabled="@item.Added"  type="number" class="form-control" @bind="item.Basket"/>
+
+            <div class="text-center mt-2">
+                <button @onclick="(()=>accept(item))" 
+                    disabled ="@item.Added"
+                    class="btn btn-success"
+                    
+                    >Accept</button>
+                <button @onclick="(()=>cancel(item))" 
+                    disabled ="@item.Deleted"
+                    class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+    </div>
+    </div>
+}
+@code {
+    [Parameter]
+    public List<Classes.Product.Product> list { get; set; } = new List<Classes.Product.Product>();
+    [Parameter]
+    public string name { get; set; } = "";
+
+    private async Task accept(Classes.Product.Product data)
+    {
+        bool exit = await bs.acceptProductBasket(data);
+        if (exit)
+        {
+            data.Added = true;
+            data.Deleted = false;
+            aS.alert("Uyarı", "Emin Misin?");
+        }
+    }
+
+    private async Task cancel(Classes.Product.Product data)
+    {
+        bool exit = await bs.deleteProductBasket(data.Id);
+        if (exit)
+        {
+            data.Added = false;
+            data.Deleted = true;
+            aS.alert("Uyarı", "Emin Misin?");
+        }
+    }
+}

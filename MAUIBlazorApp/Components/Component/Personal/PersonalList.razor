@@ -1,0 +1,77 @@
+﻿@using MAUIBlazorApp.Services
+@using MAUIBlazorApp.Classes.Personal
+@inject NavigationManager nm
+@inject PersonalService personelService
+@inject AlertService ac
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>OP</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in List)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Surname</td>
+                <td>
+                    <button @onclick="(()=>delete(item.Id))" class="btn btn-danger">Delete</button>
+                    <button @onclick="(()=>edit(item.Id))" class="btn btn-primary">Edit</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@code {
+    public List<MAUIBlazorApp.Classes.Personal.Personal> List = new List<MAUIBlazorApp.Classes.Personal.Personal>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        personelService.OnChange += refresh;
+        personelService.OnSearch += search;
+        listPersonal();
+    }
+    private async Task refresh()
+    {
+        listPersonal();
+    }
+
+    private async Task search(string name)
+    {
+        List = await personelService.personalSearch(name);
+        StateHasChanged();
+    }
+
+    private async void listPersonal()
+    {
+        List = await personelService.List();
+    }
+    private async Task edit(int Id)
+    {
+        nm.NavigateTo("/personal/edit/" + Id);
+    }
+
+    private async Task delete(int id)
+    {
+        bool opt = await ac.confirmation("Uyarı", "Emin Misiniz?");
+        if (opt)
+        {
+            bool exit = await personelService.delete(id);
+            if (exit)
+            {
+                await ac.alert("Exit", "Emin misin?");
+            }
+            else
+            {
+                await ac.alert("Error", "Emin misin?");
+
+            }
+        }
+    }
+}

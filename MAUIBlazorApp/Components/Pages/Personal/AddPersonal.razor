@@ -1,0 +1,9 @@
+﻿@inject NavigationManager nm
+@page "/personal/new"
+<MAUIBlazorApp.Components.Component.Personal.FormPersonal></MAUIBlazorApp.Components.Component.Personal.FormPersonal>
+@code {
+    private async Task Register()
+    {
+        nm.NavigateTo("/personal");
+    }
+}

@@ -1,0 +1,30 @@
+﻿@using MAUIBlazorApp.Services
+@using MAUIBlazorApp.Classes
+@inject CategoryService cs
+@inject NavigationManager nm
+@foreach (var item in Categories)
+{
+    <div class="d-flex justify-content-center mb-3">
+    <div class="card mt-4" style="width:18rem;">
+        <img src="" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+            <div class="text-center">
+                <button @onclick="(()=>searchProdbyCatId(item.Id, item.Name))" class="btn btn-primary">Go</button>
+            </div>
+        </div>
+        </div>
+    </div>
+}
+
+@code {
+    public List<Classes.Category.Category> Categories { get; set; } = new List<Classes.Category.Category>();
+    protected override async Task OnInitializedAsync()
+    {
+        Categories = await cs.catList();
+    }
+    private async Task searchProdbyCatId(int categoryId, string name)
+    {
+        nm.NavigateTo("/productocategory/" + categoryId +"/"+name);
+    }
+}

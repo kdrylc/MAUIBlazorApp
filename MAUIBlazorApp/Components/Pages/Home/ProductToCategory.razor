@@ -1,0 +1,21 @@
+﻿@page "/productocategory/{categoryId}/{name}"
+@using MAUIBlazorApp.Services
+@inject ProductService ps
+@using MAUIBlazorApp.Components.Component.Category
+
+<ProductToCategoryCard list="list" name="@name"/>
+
+@code {
+    [Parameter]
+
+    public string categoryId { get; set; }
+    [Parameter]
+    public string name { get; set; }
+
+    public List<Classes.Product.Product> list { get; set; } = new List<Classes.Product.Product>();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        list = await ps.searchProductByCategoryId(int.Parse(categoryId));
+    }
+}

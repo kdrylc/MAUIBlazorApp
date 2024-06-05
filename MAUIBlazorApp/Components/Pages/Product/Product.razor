@@ -1,0 +1,14 @@
+﻿@page "/product"
+@using MAUIBlazorApp.Services
+@inject AlertService ac
+<h3>Product</h3>
+<div class="text-center">
+    <button class="btn btn-success" @onclick="AddNew">New</button>
+</div>
+@code {
+    private async Task AddNew()
+    {
+        // App.Current.MainPage.DisplayAlert("Uyarı", "Kabul", "Red");
+      await ac.alert("Uyarı", "Emin Misiniz?");
+    }
+}
